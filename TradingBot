@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+
+public class TradingBot {
+   public ArrayList<Shares> currentPortfolio;
+   public ArrayList<Shares> publicListing;
+   public int capitalGains;
+   public int liquidCapital;
+   public TradingBot(int capitalGains,ArrayList<Shares> currentPortfolio,ArrayList<Shares> publicListing,int liquidCapital) {
+	   this.currentPortfolio=currentPortfolio;
+	   this.publicListing=publicListing;
+	   this.capitalGains=capitalGains;
+	   this.liquidCapital=liquidCapital;
+   }
+ public void Trade(int amountWillingToBuy, int amountWillingToSell) {
+	 for(int i=0;i<currentPortfolio.size();i++) {
+		 if(currentPortfolio.get(i).price<=currentPortfolio.get(i).value) {
+			 continue;
+		 }else {
+			 capitalGains+=currentPortfolio.remove(i).price * amountWillingToSell;
+		 }
+	 }
+	 for(int i=0;i<publicListing.size();i++) {
+		 if(publicListing.get(i).price<=publicListing.get(i).value) {
+			 if((liquidCapital-=publicListing.get(i).price*amountWillingToBuy)<=0) {
+				 break;
+			 }
+			 currentPortfolio.add(publicListing.get(i));
+			 liquidCapital-=publicListing.get(i).price*amountWillingToBuy;
+		 }else {
+			 continue;
+		 }
+	  }
+	}
+ }
