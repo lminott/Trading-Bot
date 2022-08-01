@@ -1,0 +1,11 @@
+public class Shares {
+   int name;
+   int price;
+   int value;
+
+   public Shares(int name,int price, int value,int amount) {
+	   	this.name=name;
+	   	this.price=price;
+	   	this.value=value;
+   }
+}
